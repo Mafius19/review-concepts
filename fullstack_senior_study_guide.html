@@ -1,0 +1,300 @@
+
+<style>
+h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary)}
+.container{padding:1.5rem 0}
+.tabs{display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{padding:8px 16px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:transparent;cursor:pointer;font-size:14px;font-weight:500;color:var(--color-text-secondary);transition:all .15s}
+.tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.tab:hover:not(.active){background:var(--color-background-secondary)}
+.panel{display:none}
+.panel.active{display:block}
+.section{margin-bottom:1.5rem}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card-icon{font-size:18px;color:var(--color-text-secondary)}
+.card-title{font-size:14px;font-weight:500}
+.card-body{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.tag{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--border-radius-md);margin:2px 2px 2px 0}
+.tag-blue{background:#E6F1FB;color:#0C447C}
+.tag-teal{background:#E1F5EE;color:#085041}
+.tag-amber{background:#FAEEDA;color:#633806}
+.tag-coral{background:#FAECE7;color:#712B13}
+.tag-purple{background:#EEEDFE;color:#3C3489}
+.q-block{border-left:2px solid var(--color-border-secondary);padding:10px 14px;margin-bottom:10px;background:var(--color-background-secondary);border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.q-text{font-size:14px;font-weight:500;margin-bottom:4px}
+.q-hint{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.chip{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);margin-right:4px}
+.reto-card{border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:12px;background:var(--color-background-primary)}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:99px;display:inline-block;margin-bottom:8px}
+.badge-hard{background:#FAECE7;color:#712B13}
+.badge-med{background:#FAEEDA;color:#633806}
+.arch-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:6px 0}
+.arch-box{padding:5px 12px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;white-space:nowrap}
+.arch-arrow{color:var(--color-text-secondary);font-size:16px}
+</style>
+
+<div class="container">
+<h2 class="sr-only">Panel de estudio Full Stack Senior: Node, NestJS, Next.js y React — conceptos clave, preguntas de entrevista y reto técnico.</h2>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('node',this)"><i class="ti ti-server" aria-hidden="true"></i> Node.js</button>
+  <button class="tab" onclick="show('nest',this)"><i class="ti ti-building" aria-hidden="true"></i> NestJS</button>
+  <button class="tab" onclick="show('next',this)"><i class="ti ti-layout" aria-hidden="true"></i> Next.js</button>
+  <button class="tab" onclick="show('react',this)"><i class="ti ti-components" aria-hidden="true"></i> React</button>
+  <button class="tab" onclick="show('reto',this)"><i class="ti ti-trophy" aria-hidden="true"></i> Reto técnico</button>
+</div>
+
+<!-- NODE -->
+<div id="node" class="panel active">
+  <div class="section">
+    <div class="section-title">Conceptos core — lo que sí o sí preguntan</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head"><i class="ti ti-refresh card-icon" aria-hidden="true"></i><span class="card-title">Event Loop</span></div>
+        <div class="card-body">Call stack → Web APIs → Callback queue → Microtask queue. <strong style="font-weight:500">Microtasks</strong> (Promises, queueMicrotask) tienen prioridad sobre macrotasks (setTimeout, setImmediate).</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-arrows-split-2 card-icon" aria-hidden="true"></i><span class="card-title">Worker Threads vs Cluster</span></div>
+        <div class="card-body">Worker Threads para CPU-bound (comparten memoria vía SharedArrayBuffer). Cluster para escalar en múltiples cores duplicando el proceso.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-wave-sine card-icon" aria-hidden="true"></i><span class="card-title">Streams & Backpressure</span></div>
+        <div class="card-body">Readable/Writable/Transform. Backpressure ocurre cuando el consumer no puede seguir el ritmo del producer — manejar con <code>pipe()</code> o <code>highWaterMark</code>.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-package card-icon" aria-hidden="true"></i><span class="card-title">Módulos ESM vs CJS</span></div>
+        <div class="card-body">CJS: síncrono, <code>require()</code>, caching. ESM: asíncrono, tree-shakeable, <code>import/export</code>. En Node 22+ ESM es el estándar preferido.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-shield card-icon" aria-hidden="true"></i><span class="card-title">Security & hardening</span></div>
+        <div class="card-body">Helmet, rate limiting, validación de input, evitar <code>eval()</code>, actualizar deps con <code>npm audit</code>, usar <code>--experimental-permission</code> en v20+.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-chart-line card-icon" aria-hidden="true"></i><span class="card-title">Observabilidad</span></div>
+        <div class="card-body">OpenTelemetry nativo. Métricas con <code>process.memoryUsage()</code>, <code>perf_hooks</code>. Profiling con <code>--prof</code> + <code>node --prof-process</code>.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Preguntas frecuentes senior</div>
+    <div class="q-block"><div class="q-text">¿Cómo evitarías bloquear el event loop en una operación CPU-intensiva?</div><div class="q-hint">→ Worker threads, offloading a microservicio, caching del resultado costoso.</div></div>
+    <div class="q-block"><div class="q-text">¿Diferencia entre process.nextTick y Promise.resolve().then?</div><div class="q-hint">→ Ambos son microtasks, pero nextTick tiene mayor prioridad dentro del mismo tick.</div></div>
+    <div class="q-block"><div class="q-text">¿Cómo manejarías memory leaks en producción?</div><div class="q-hint">→ Heap snapshots con Chrome DevTools / clinic.js, detectar closures retenidos, event listeners no removidos.</div></div>
+  </div>
+  <div class="section">
+    <div class="section-title">Tags clave para el CV</div>
+    <span class="tag tag-blue">Event Loop</span><span class="tag tag-blue">Streams</span><span class="tag tag-blue">Worker Threads</span><span class="tag tag-teal">ESM/CJS</span><span class="tag tag-teal">OpenTelemetry</span><span class="tag tag-amber">Cluster</span><span class="tag tag-amber">Backpressure</span><span class="tag tag-coral">npm audit</span>
+  </div>
+</div>
+
+<!-- NEST -->
+<div id="nest" class="panel">
+  <div class="section">
+    <div class="section-title">Arquitectura & patrones</div>
+    <div class="arch-row">
+      <div class="arch-box" style="background:#E6F1FB;color:#0C447C">Request</div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box" style="background:#EEEDFE;color:#3C3489">Guards</div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box" style="background:#EEEDFE;color:#3C3489">Interceptors</div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box" style="background:#FAEEDA;color:#633806">Pipes</div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box" style="background:#E1F5EE;color:#085041">Controller</div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box" style="background:#E1F5EE;color:#085041">Service</div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box" style="background:#FAECE7;color:#712B13">Filters</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Conceptos core</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head"><i class="ti ti-inject card-icon" aria-hidden="true"></i><span class="card-title">DI & IoC container</span></div>
+        <div class="card-body">Scopes: <strong style="font-weight:500">DEFAULT</strong> (singleton), REQUEST (por request), TRANSIENT (nueva instancia cada vez). Cuidado con REQUEST scope en performance.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-box card-icon" aria-hidden="true"></i><span class="card-title">Módulos dinámicos</span></div>
+        <div class="card-body"><code>forRoot()</code> / <code>forFeature()</code> / <code>register()</code>. Permiten configurar módulos con opciones en tiempo de arranque (ej: TypeORM, Config).</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-shield-check card-icon" aria-hidden="true"></i><span class="card-title">Auth patterns</span></div>
+        <div class="card-body">JWT con <code>@nestjs/jwt</code> + Guards. Refresh tokens con rotación. RBAC con <code>@Roles()</code> + <code>RolesGuard</code>. Integración con Passport strategies.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-antenna card-icon" aria-hidden="true"></i><span class="card-title">Microservicios</span></div>
+        <div class="card-body">Transporters: TCP, Redis, RabbitMQ, Kafka. Patrones: request/response (<code>@MessagePattern</code>) y event-driven (<code>@EventPattern</code>).</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-test-pipe card-icon" aria-hidden="true"></i><span class="card-title">Testing</span></div>
+        <div class="card-body"><code>Test.createTestingModule()</code> para unit tests. Mocking de providers con <code>{ provide: Service, useValue: mockObj }</code>. E2E con supertest.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-database card-icon" aria-hidden="true"></i><span class="card-title">ORM & DB patterns</span></div>
+        <div class="card-body">TypeORM con Repository pattern o DataSource directo. Prisma como alternativa type-safe. Migrations en CI/CD, nunca <code>synchronize: true</code> en prod.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Preguntas frecuentes senior</div>
+    <div class="q-block"><div class="q-text">¿Cuándo usarías un Interceptor vs un Middleware?</div><div class="q-hint">→ Middleware para transformar req/res antes del routing. Interceptor para transformar la respuesta del handler, logging, caching.</div></div>
+    <div class="q-block"><div class="q-text">¿Cómo implementarías un sistema de eventos desacoplado en NestJS?</div><div class="q-hint">→ EventEmitter2 para eventos in-process, o CQRS con @nestjs/cqrs para separar Commands/Queries/Events.</div></div>
+    <div class="q-block"><div class="q-text">¿Cómo escalarías un módulo de notificaciones?</div><div class="q-hint">→ BullMQ para cola de jobs, patrón productor/consumidor, idempotencia con job IDs.</div></div>
+  </div>
+</div>
+
+<!-- NEXT -->
+<div id="next" class="panel">
+  <div class="section">
+    <div class="section-title">Rendering strategies — la pregunta de oro</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head"><span class="card-title">SSG</span></div>
+        <div class="card-body">Build time. <code>generateStaticParams</code>. Ideal: blogs, docs, marketing. Revalidación con ISR (<code>revalidate: N</code>).</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">SSR</span></div>
+        <div class="card-body">Cada request. <code>export const dynamic = 'force-dynamic'</code>. Ideal: dashboards con datos en tiempo real.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">RSC</span></div>
+        <div class="card-body">React Server Components (App Router). Se renderizan en servidor, no se hidratan. Zero JS al cliente. Fetch directo a DB.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">Streaming</span></div>
+        <div class="card-body"><code>Suspense</code> + <code>loading.tsx</code>. Envía HTML progresivamente. Mejora TTFB sin sacrificar data fresca.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">App Router — conceptos avanzados</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head"><i class="ti ti-layers card-icon" aria-hidden="true"></i><span class="card-title">Layouts & Templates</span></div>
+        <div class="card-body">Layout persiste estado entre navegaciones. Template re-monta en cada navegación. Parallel routes con <code>@slot</code>. Intercepting routes con <code>(..)</code>.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-server-2 card-icon" aria-hidden="true"></i><span class="card-title">Server Actions</span></div>
+        <div class="card-body"><code>'use server'</code>. Mutaciones directas sin API route. Revalidación con <code>revalidatePath / revalidateTag</code>. Progresivamente mejora forms sin JS.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-lock card-icon" aria-hidden="true"></i><span class="card-title">Middleware & Auth</span></div>
+        <div class="card-body">Corre en Edge Runtime. Proteger rutas antes de renderizar. NextAuth.js / Auth.js v5 para OAuth + JWT + session management.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-bolt card-icon" aria-hidden="true"></i><span class="card-title">Optimizaciones</span></div>
+        <div class="card-body"><code>next/image</code> (lazy, WebP, srcset), <code>next/font</code> (self-hosted, no layout shift), <code>next/dynamic</code> (code splitting), Bundle Analyzer.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Preguntas frecuentes senior</div>
+    <div class="q-block"><div class="q-text">¿Cuándo elegirías un Server Component vs Client Component?</div><div class="q-hint">→ SC por defecto. CC solo si necesitás hooks, eventos del browser, o estado interactivo. Empujar 'use client' lo más abajo posible en el árbol.</div></div>
+    <div class="q-block"><div class="q-text">¿Cómo funciona el data cache de Next.js 14+?</div><div class="q-hint">→ fetch() extendido con tags y time-based revalidation. Separado del router cache (en memoria, client-side).</div></div>
+  </div>
+</div>
+
+<!-- REACT -->
+<div id="react" class="panel">
+  <div class="section">
+    <div class="section-title">Conceptos avanzados que definen el seniority</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head"><i class="ti ti-brand-react card-icon" aria-hidden="true"></i><span class="card-title">Concurrent Features</span></div>
+        <div class="card-body"><code>useTransition</code> para marcar updates no urgentes. <code>useDeferredValue</code> para debounce de renders. <code>Suspense</code> para lazy loading y data fetching.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-refresh card-icon" aria-hidden="true"></i><span class="card-title">Reconciliation & Fiber</span></div>
+        <div class="card-body">React Fiber: trabajo en unidades interrumpibles. Diffing: mismo tipo = update, distinto tipo = unmount + mount. Keys determinan identidad en listas.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-cpu card-icon" aria-hidden="true"></i><span class="card-title">Memoización</span></div>
+        <div class="card-body"><code>useMemo</code> para valores computados costosos. <code>useCallback</code> para estabilizar referencias de funciones. <code>React.memo</code> para componentes puros. No abusar — profiling primero.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-topology-star card-icon" aria-hidden="true"></i><span class="card-title">State management</span></div>
+        <div class="card-body">Zustand para global simple. Jotai para estado atómico. TanStack Query para server state (cache, refetch, optimistic updates). Context solo para config/tema.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-accessible card-icon" aria-hidden="true"></i><span class="card-title">Patrones avanzados</span></div>
+        <div class="card-body">Compound components, Render props, HOC (legacy pero vigente). Custom hooks para lógica reutilizable. Controlled vs Uncontrolled components.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><i class="ti ti-test-pipe card-icon" aria-hidden="true"></i><span class="card-title">Testing</span></div>
+        <div class="card-body">Testing Library: renderizar, actuar, assertar comportamiento (no implementación). Vitest > Jest en proyectos modernos. MSW para mock de API calls.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Preguntas frecuentes senior</div>
+    <div class="q-block"><div class="q-text">¿Cuál es la diferencia entre useEffect y useLayoutEffect?</div><div class="q-hint">→ useLayoutEffect corre síncronamente después del DOM update pero antes del paint — para medir DOM. useEffect es asíncrono, post-paint.</div></div>
+    <div class="q-block"><div class="q-text">¿Cómo evitarías re-renders innecesarios en una lista de 1000 items?</div><div class="q-hint">→ Virtualización (TanStack Virtual), React.memo en items, stable key, selector granular de store.</div></div>
+    <div class="q-block"><div class="q-text">¿Cómo implementarías un debounce con hooks sin bugs de stale closure?</div><div class="q-hint">→ useRef para mantener la función actualizada, useCallback + deps bien declaradas, o librería como use-debounce.</div></div>
+  </div>
+</div>
+
+<!-- RETO -->
+<div id="reto" class="panel">
+  <div class="section">
+    <div class="section-title">Reto técnico integrado — nivel senior</div>
+    <div class="reto-card">
+      <span class="badge badge-hard">Dificultad alta</span>
+      <div style="font-size:16px;font-weight:500;margin-bottom:8px">Task Manager con colaboración en tiempo real</div>
+      <div style="font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:12px">
+        Construir una app de gestión de tareas tipo Trello, con autenticación, tableros compartidos, y actualizaciones en tiempo real entre múltiples usuarios.
+      </div>
+      <div class="section-title" style="margin-top:12px">Stack requerido</div>
+      <div style="margin-bottom:12px">
+        <span class="chip">NestJS — API REST + WebSockets</span>
+        <span class="chip">Next.js 14 App Router</span>
+        <span class="chip">React + TanStack Query</span>
+        <span class="chip">PostgreSQL + Prisma</span>
+        <span class="chip">Redis (pub/sub)</span>
+        <span class="chip">Docker Compose</span>
+      </div>
+      <div class="section-title">Requerimientos funcionales</div>
+      <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:12px">
+        1. Auth con JWT (access + refresh token rotation)<br>
+        2. CRUD de boards, columns y cards con drag & drop<br>
+        3. Actualizaciones en tiempo real via WebSockets (múltiples usuarios ven cambios al instante)<br>
+        4. Asignación de usuarios a cards, labels y due dates<br>
+        5. Actividad log por board (event sourcing lite)
+      </div>
+      <div class="section-title">Requerimientos técnicos — aquí está el reto senior</div>
+      <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:12px">
+        🔒 <strong style="font-weight:500">Guards + RBAC</strong>: owner puede eliminar board, member solo puede editar cards<br>
+        📡 <strong style="font-weight:500">WebSocket gateway</strong> en NestJS con rooms por board-id<br>
+        ⚡ <strong style="font-weight:500">Optimistic updates</strong> en React — mover card se ve instantáneo aunque falle el server<br>
+        🗄️ <strong style="font-weight:500">Redis pub/sub</strong> para sincronizar múltiples instancias del servidor (escalabilidad horizontal)<br>
+        📦 <strong style="font-weight:500">Server Actions</strong> en Next.js para mutaciones simples (crear card, update label)<br>
+        🧪 <strong style="font-weight:500">Tests</strong>: unit de guards + interceptors en Nest, integration de hooks en React
+      </div>
+      <div class="section-title">Hitos recomendados</div>
+      <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.8">
+        <strong style="font-weight:500">Día 1–2</strong>: scaffolding Nest + Next, auth completo con refresh tokens<br>
+        <strong style="font-weight:500">Día 3–4</strong>: CRUD boards/cards, RBAC, Prisma schema con relaciones<br>
+        <strong style="font-weight:500">Día 5–6</strong>: WebSocket gateway, rooms, Redis pub/sub<br>
+        <strong style="font-weight:500">Día 7</strong>: optimistic updates en client, drag & drop, tests unitarios
+      </div>
+    </div>
+    <div style="margin-top:8px">
+      <button class="tab" style="font-size:13px" onclick="sendPrompt('Arrancamos con el reto técnico. Ayudame a armar el scaffolding inicial de NestJS con auth JWT y refresh tokens ↗')">Empezar el reto ahora ↗</button>
+      <button class="tab" style="font-size:13px;margin-left:8px" onclick="sendPrompt('Haceme una pregunta de entrevista senior difícil sobre Node.js y NestJS ↗')">Simular entrevista ↗</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
